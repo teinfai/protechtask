@@ -169,7 +169,7 @@ function Cart() {
                         }) && (
                                 <Row>
                                     <Row className='mt-4 justify-content-end'>
-                                        <Col xs="11" className='text-end' style={{ fontWeight: '800' }}> <FontAwesomeIcon onClick={() => removeAllInCart()} icon={faTrash} /> 清空购物车</Col>
+                                        <Col xs="11" className='text-end' style={{ fontWeight: '800' }}> <FontAwesomeIcon onClick={() => removeAllInCart()} icon={faTrash} /> <span onClick={() => removeAllInCart()}>清空购物车</span></Col>
                                     </Row>
 
                                     <Col xs="12">
