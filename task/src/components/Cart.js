@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { UpdateCart } from "../Store/reduxjs/cart.js";
 import './Cart.css';
 import { toast } from 'react-toastify';
-
+import { faStore } from '@fortawesome/free-solid-svg-icons';
 
 
 function Cart() {
@@ -153,7 +153,7 @@ function Cart() {
                     <h2 onClick={gobacktoshopping} className='mb-0'>购物车</h2>
                 </Col>
                 <Col className="text-center tex-white mt-3" xs="3">
-                    <p onClick={gobacktoshopping} >选择</p>
+                    <p style={{ color: 'white' }} onClick={gobacktoshopping} >选择</p>
                 </Col>
             </Row>
 
@@ -174,7 +174,11 @@ function Cart() {
 
                                     <Col xs="12">
                                         <Card style={{ width: '93%', margin: '1rem' }}>
-
+                                            <Row className='pt-2'>
+                                                <Col xs="1"></Col>
+                                                <Col xs="6" className='text-start'> <FontAwesomeIcon icon={faStore} /><span className='ps-2'>车商</span>
+                                                </Col>
+                                            </Row>
                                             <CardBody>
                                                 {products
                                                     .filter(product => {
