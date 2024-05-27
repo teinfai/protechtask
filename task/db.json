@@ -1,0 +1,11 @@
+{
+    "products": [
+      { "id": 1, "name": "Benz", "price": 10, "image": "benz", "quantity": 0, "location": "杭走", "expiredDate": "25/03/2024" },
+      { "id": 2, "name": "BMW", "price": 20, "image": "bmw", "quantity": 0, "location": "四川", "expiredDate": "27/08/2024" },
+      { "id": 3, "name": "BYD", "price": 30, "image": "bye", "quantity": 0, "location": "重庆", "expiredDate": "25/03/2024" },
+      { "id": 4, "name": "Myvi", "price": 40, "image": "myvi", "quantity": 0, "location": "湖南", "expiredDate": "27/08/2024" },
+      { "id": 5, "name": "Proton", "price": 50, "image": "proton", "quantity": 0, "location": "北京", "expiredDate": "27/08/2024" },
+      { "id": 6, "name": "Subaru", "price": 60, "image": "subaru", "quantity": 0, "location": "广东", "expiredDate": "27/08/2024" }
+    ]
+  }
+  

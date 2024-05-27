@@ -1,0 +1,36 @@
+.cart-icon {
+    cursor: pointer;
+    color: #333;
+}
+
+.overlap-row {
+    margin-bottom: -150px; 
+  }
+
+  /* .search-icon {
+    margin-top: 35px;
+  } */
+
+.scrollable-card-body {
+    height: 200px; 
+    overflow-y: auto;
+}
+
+.ontop {
+    position: absolute;
+    z-index: 1;
+}
+
+.price-bottom {
+    /* position: -webkit-sticky; */
+    position: fixed;
+    bottom: 0;
+    /* z-index: 1000; Ensure it's above other content */
+    background-color: #ffffff; /* Add background color if needed */
+  }
+  
+
+
+
+
+
