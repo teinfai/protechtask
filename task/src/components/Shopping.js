@@ -19,48 +19,48 @@ function ShoppingPage() {
     const cart = useSelector((state) => state.cart.value);
     const [cartitem, setcartitem] = useState([]);
     const navigate = useNavigate();
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        fetch('http://localhost:3001/products')
-            .then(response => response.json())
-            .then(data =>
-                setProducts(data)
-            )
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://54.179.106.246/cheng/build/db.json')
+    //         .then(response => response.json())
+    //         .then(data =>
+    //             setProducts(data)
+    //         )
+    //         .catch(error => console.error('Error fetching data:', error));
+    // }, []);
 
-    const updatedProducts = products.map(item => {
-        if (item.name === 'Benz') {
-            return { ...item, image: benz };
-        } else if (item.name === 'BMW') {
-            return { ...item, image: bmw };
-        } else if (item.name === 'BYD') {
-            return { ...item, image: bye };
-        } else if (item.name === 'Myvi') {
-            return { ...item, image: myvi };
-        } else if (item.name === 'Proton') {
-            return { ...item, image: proton };
-        } else if (item.name === 'Subaru') {
-            return { ...item, image: subaru };
-        }
-        return item;
-    });
+    // const updatedProducts = products.map(item => {
+    //     if (item.name === 'Benz') {
+    //         return { ...item, image: benz };
+    //     } else if (item.name === 'BMW') {
+    //         return { ...item, image: bmw };
+    //     } else if (item.name === 'BYD') {
+    //         return { ...item, image: bye };
+    //     } else if (item.name === 'Myvi') {
+    //         return { ...item, image: myvi };
+    //     } else if (item.name === 'Proton') {
+    //         return { ...item, image: proton };
+    //     } else if (item.name === 'Subaru') {
+    //         return { ...item, image: subaru };
+    //     }
+    //     return item;
+    // });
 
-    products.length = 0;
-    updatedProducts.forEach(item => {
-        products.push(item);
-    });
+    // products.length = 0;
+    // updatedProducts.forEach(item => {
+    //     products.push(item);
+    // });
 
     // console.log(products);
-    // const products = [
-    //     { id: 1, name: 'Benz', price: 10, image: benz, quantity: 0, location: "杭走", expiredDate: "25/03/2024" },
-    //     { id: 2, name: 'BMW', price: 20, image: bmw, quantity: 0, location: "四川", expiredDate: "27/08/2024" },
-    //     { id: 3, name: 'BYD', price: 30, image: bye, quantity: 0, location: "重庆", expiredDate: "27/08/2024" },
-    //     { id: 4, name: 'Myvi', price: 40, image: myvi, quantity: 0, location: "湖南", expiredDate: "27/08/2024" },
-    //     { id: 5, name: 'Proton', price: 50, image: proton, quantity: 0, location: "北京", expiredDate: "27/08/2024" },
-    //     { id: 6, name: 'Subaru', price: 60, image: subaru, quantity: 0, location: "广东", expiredDate: "27/08/2024" },
-    // ];
+    const products = [
+        { id: 1, name: 'Benz', price: 10, image: benz, quantity: 0, location: "杭走", expiredDate: "25/03/2024" },
+        { id: 2, name: 'BMW', price: 20, image: bmw, quantity: 0, location: "四川", expiredDate: "27/08/2024" },
+        { id: 3, name: 'BYD', price: 30, image: bye, quantity: 0, location: "重庆", expiredDate: "27/08/2024" },
+        { id: 4, name: 'Myvi', price: 40, image: myvi, quantity: 0, location: "湖南", expiredDate: "27/08/2024" },
+        { id: 5, name: 'Proton', price: 50, image: proton, quantity: 0, location: "北京", expiredDate: "27/08/2024" },
+        { id: 6, name: 'Subaru', price: 60, image: subaru, quantity: 0, location: "广东", expiredDate: "27/08/2024" },
+    ];
 
     const addToCart = (ProductId) => {
         notify();
@@ -104,54 +104,54 @@ function ShoppingPage() {
     return (
 
         <Fragment>
-            <Row className="align-items-center py-3 justify-content-center mb-1" style={{ backgroundColor: "#FFB366" }}>
-                <Col className="text-start" xs="3">
-                </Col>
-                <Col className="text-center" xs="6">
-                    <div className='fw-bold'>网购页</div>
-                </Col>
-                <Col className="text-center" xs="3">
-                    <FontAwesomeIcon onClick={goToCart} icon={faShoppingCart} size="sm" className="cart-icon" />
-                </Col>
-            </Row>
-            <Container>
-
-
-                <Row>
-                    {products.map(product => (
-                        <Col xs="6" md="6" lg="4" key={product.id} className="mb-4">
-
-                            <Card className='product-card' onClick={() => addToCart(product.id)} style={{ height: '100%' }}>
-                                <CardBody className='d-flex align-items-xs-center'>
-                                    <img src={product.image} alt={product.name} className="img-fluid" />
-                                </CardBody>
-                                <CardFooter>
-                                    <CardTitle style={{ marginBottom: "40px" }} tag="h5">
-                                        {product.name}
-                                    </CardTitle>
-                                    {/* <CardSubtitle
-                                    className="mb-2 text-muted"
-                                    tag="h6"
-                                    >
-                                    Card subtitle
-                                </CardSubtitle> */}
-                                    <CardText>
-                                        <Row>
-                                            <Col xs="6">
-                                                <CardText style={{ color: 'red', fontWeight: '600' }} >¥{product.price}</CardText>
-                                            </Col>
-                                            <Col className="text-end" xs="6">
-                                                <CardText>{product.location}</CardText>
-                                            </Col>
-
-                                        </Row>
-                                    </CardText>
-                                </CardFooter>
-                            </Card>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-7 col-12 pe-0">
+                    <Row className="align-items-center py-3 justify-content-center mb-1" style={{ backgroundColor: "#FFB366" }}>
+                        <Col className="text-start" xs="3">
                         </Col>
-                    ))}
-                </Row>
-            </Container>
+                        <Col className="text-center" xs="6">
+                            <div className='fw-bold'>网购页</div>
+                        </Col>
+                        <Col className="text-center" xs="3">
+                            <FontAwesomeIcon onClick={goToCart} icon={faShoppingCart} size="sm" className="cart-icon" />
+                        </Col>
+                    </Row>
+                    <Container>
+                        <Row>
+                            {products.map(product => (
+                                <Col xs="6" key={product.id} className="mb-4">
+                                    <Card className='product-card' onClick={() => addToCart(product.id)} style={{ height: '100%' }}>
+                                        <CardBody className='d-flex align-items-xs-center justify-content-center'>
+                                            <img src={product.image} alt={product.name} className="img-fluid" />
+                                        </CardBody>
+                                        <CardFooter>
+                                            <CardTitle style={{ marginBottom: "40px" }} tag="h5">
+                                                {product.name}
+                                            </CardTitle>
+                                            {/* <CardSubtitle
+                                            className="mb-2 text-muted"
+                                            tag="h6"
+                                            >
+                                            Card subtitle
+                                        </CardSubtitle> */}
+                                            <CardText>
+                                                <Row>
+                                                    <Col xs="6">
+                                                        <CardText style={{ color: 'red', fontWeight: '600' }} >¥{product.price}</CardText>
+                                                    </Col>
+                                                    <Col className="text-end" xs="6">
+                                                        <CardText>{product.location}</CardText>
+                                                    </Col>
+                                                </Row>
+                                            </CardText>
+                                        </CardFooter>
+                                    </Card>
+                                </Col>
+                            ))}
+                        </Row>
+                    </Container>
+                </div>
+            </div>
         </Fragment>
 
     );

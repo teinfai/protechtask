@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Card, CardBody, CardTitle, CardText, Button, Row, Col, Container, Input } from 'reactstrap';
+import { Card, CardBody, CardFooter, CardTitle, CardText, Button, Row, Col, Container, Input, CardHeader } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBag, faTrash, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { UpdateCart } from "../Store/reduxjs/cart.js";
 import './Cart.css';
 import { toast } from 'react-toastify';
-import { faStore } from '@fortawesome/free-solid-svg-icons';
+import { faStore, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+
 
 
 function Cart() {
@@ -113,7 +114,7 @@ function Cart() {
     };
 
     const gobacktoshopping = () => {
-        navigate('/');
+        navigate('/shopping');
     };
 
     const notify = () => {
@@ -145,176 +146,169 @@ function Cart() {
     return (
         <Fragment>
 
-            <Row className="align-items-start justify-content-center mb-1 mx-0" style={{ backgroundColor: '#70b2d9', backgroundImage: 'linear-gradient(315deg, #70b2d9 0%, #39e5b6 74%)', height: "150px" }}>
-                <Col onClick={gobacktoshopping} className="text-center align-self-center pb-5" xs="3">
-                    <FontAwesomeIcon icon={faSearch} onClick={gobacktoshopping} size="lg" className="search-icon" />
-                </Col>
-                <Col className="text-center mt-2 text-white" xs="6">
-                    <h2 onClick={gobacktoshopping} className='mb-0'>购物车</h2>
-                </Col>
-                <Col className="text-center tex-white mt-3" xs="3">
-                    <p style={{ color: 'white' }} onClick={gobacktoshopping} >选择</p>
-                </Col>
-            </Row>
-
-            <div style={{ position: 'absolute', top: '50px', width: '100%', zIndex: 2 }}>
-                <Row >
-                    <Col xs="12">
-                        {products.some(product => {
-                            const [day, month, year] = product.expiredDate.split("/");
-                            const formattedDate = `${month}/${day}/${year}`;
-                            const currentDate = new Date();
-                            const expirationDate = new Date(formattedDate);
-                            return expirationDate > currentDate;
-                        }) && (
-                                <Row>
-                                    <Row className='mt-4 justify-content-end'>
-                                        <Col xs="11" className='text-end' style={{ fontWeight: '800' }}> <FontAwesomeIcon onClick={() => removeAllInCart()} icon={faTrash} /> <span onClick={() => removeAllInCart()}>清空购物车</span></Col>
-                                    </Row>
-
-                                    <Col xs="12">
-                                        <Card style={{ width: '93%', margin: '1rem' }}>
-                                            <Row className='pt-2'>
-                                                <Col xs="1"></Col>
-                                                <Col xs="6" className='text-start'> <FontAwesomeIcon icon={faStore} /><span className='ps-2'>车商</span>
-                                                </Col>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-7 col-12">
+                    <Row className="align-items-start justify-content-center mb-1 mx-0" style={{ backgroundColor: '#70b2d9', backgroundImage: 'linear-gradient(315deg, #70b2d9 0%, #39e5b6 74%)', height: "150px" }}>
+                        <Col onClick={gobacktoshopping} className="text-center align-self-center pb-5" xs="3">
+                            <FontAwesomeIcon icon={faSearch} onClick={gobacktoshopping} size="lg" className="search-icon" />
+                        </Col>
+                        <Col className="text-center mt-2 text-white" xs="6">
+                            <h2 onClick={gobacktoshopping} className='mb-0'>购物车</h2>
+                        </Col>
+                        <Col className="text-center tex-white mt-3" xs="3">
+                            <p style={{ color: 'white' }} onClick={gobacktoshopping} >选择</p>
+                        </Col>
+                    </Row>
+                    <div style={{ position: 'relative', bottom: '110px', zIndex: 2 }}>
+                        <Row className='mx-0'>
+                            <Col xs="12">
+                                {products.some(product => {
+                                    const [day, month, year] = product.expiredDate.split("/");
+                                    const formattedDate = `${month}/${day}/${year}`;
+                                    const currentDate = new Date();
+                                    const expirationDate = new Date(formattedDate);
+                                    return expirationDate > currentDate;
+                                }) && (
+                                        <Row className='mx-0'>
+                                            <Row className='mt-4 mb-2 justify-content-end mx-0'>
+                                                <Col xs="11" className='text-end' style={{ fontWeight: '800' }}> <FontAwesomeIcon onClick={() => removeAllInCart()} icon={faTrash} /> <span onClick={() => removeAllInCart()}>清空购物车</span></Col>
                                             </Row>
-                                            <CardBody>
-                                                {products
-                                                    .filter(product => {
-                                                        const [day, month, year] = product.expiredDate.split("/");
-                                                        const formattedDate = `${month}/${day}/${year}`;
-                                                        const currentDate = new Date();
-                                                        const expirationDate = new Date(formattedDate);
-                                                        return expirationDate > currentDate;
-                                                    })
-                                                    .map(product => (
-                                                        <div key={product.id} className='my-4'>
+                                            <Col xs="12">
+                                                <Card>
+                                                    <CardHeader className='pt-2'>
+                                                        <Row className='my-1 mx-0'>
+                                                            <Col xs="1"></Col>
+                                                            <Col xs="6" className='text-start'> <FontAwesomeIcon icon={faStore} /><span className='ps-2'>车商</span>
+                                                            </Col>
+                                                            <Col className='text-end' xs="5">领券</Col>
+                                                        </Row>
+                                                    </CardHeader>
+                                                    {products
+                                                        .filter(product => {
+                                                            const [day, month, year] = product.expiredDate.split("/");
+                                                            const formattedDate = `${month}/${day}/${year}`;
+                                                            const currentDate = new Date();
+                                                            const expirationDate = new Date(formattedDate);
+                                                            return expirationDate > currentDate;
+                                                        })
+                                                        .map(product => (
+                                                            <CardBody className='mt-3' style={{ borderBottom: "1px solid #ededed" }}>
+                                                                <div key={product.id}>
+                                                                    <Row>
+                                                                        <Col xs="1" className='align-self-center'>
+                                                                            <Input type="checkbox" checked={selectedItems[product.id] || false} onChange={() => toggleCheckbox(product.id)} />
+                                                                        </Col>
+                                                                        <Col className='align-self-center' xs="6">
+                                                                            <img src={product.image} alt={product.name} className='img-fluid' />
+                                                                        </Col>
+                                                                        <Col xs="5">
+                                                                            <Row className='mb-3 mx-0 justify-content-between'>
+                                                                                <Col xs="8" className='px-0'>
+                                                                                    <CardTitle tag="div" style={{ fontWeight: 'bold' }}>{product.name}</CardTitle>
+                                                                                </Col>
+                                                                                <Col xs="1">
+                                                                                    <FontAwesomeIcon className="pe-3" onClick={() => removeItem(product.id)} icon={faTrash} />
+                                                                                </Col>
+                                                                            </Row>
+                                                                        </Col>
+                                                                    </Row>
+                                                                    <Row className='my-3'>
+                                                                        <Col xs="1">
+                                                                        </Col>
+                                                                        <Col xs="5" className='align-self-center'>
+                                                                            <CardText style={{ color: 'red', fontWeight: '600' }}>¥{product.quantity * product.price}</CardText>
+                                                                        </Col>
+                                                                        <Col className='text-end' xs="6">
+                                                                            <Button className='btn btn-danger' color="primary" onClick={() => decrementQuantity(product.id)} style={{ width: '50px', padding: '3px' }}><FontAwesomeIcon icon={faMinus} /></Button>{' '}
+                                                                            <span className='mx-1'>{product.quantity}{' '}</span>
+                                                                            <Button className='btn btn-success' color="primary" onClick={() => incrementQuantity(product.id)} style={{ width: '50px', padding: '3px' }}><FontAwesomeIcon icon={faPlus} /></Button>{' '}
+                                                                        </Col>
+                                                                    </Row>
+                                                                </div>
+                                                            </CardBody>
+                                                        ))}
+                                                </Card>
+                                            </Col>
+                                        </Row>
+                                    )}
+                            </Col>
+                        </Row >
+                        <Row className='mb-5 mx-0' style={{ marginTop: '24px' }}>
+                            <Col xs="12" className='mb-5'>
+                                {products.some(product => {
+                                    const [day, month, year] = product.expiredDate.split("/");
+                                    const formattedDate = `${month}/${day}/${year}`;
+                                    const currentDate = new Date();
+                                    const expirationDate = new Date(formattedDate);
+                                    return expirationDate < currentDate;
+                                }) && (
+                                        <Card style={{ width: '93%', margin: '1rem' }}>
+                                            <Row className='mt-3 mx-0 sticky-bottom'>
+                                                <Col style={{ fontWeight: '800' }} xs="4"><small>已失效</small></Col>
+                                                <Col xs="4" style={{ color: 'red', fontWeight: '800' }}><small>移入收藏夹</small></Col>
+                                                <Col onClick={() => removeExpiredItem()} xs="4" style={{ color: 'red', fontWeight: '800' }}><small>清空失效的宝贝</small></Col>
+                                            </Row>
+                                            {products
+                                                .filter(product => {
+                                                    const [day, month, year] = product.expiredDate.split("/");
+                                                    const formattedDate = `${month}/${day}/${year}`;
+                                                    const currentDate = new Date();
+                                                    const expirationDate = new Date(formattedDate);
+                                                    return expirationDate < currentDate;
+                                                })
+                                                .map(product => (
+                                                    <CardBody className='mt-3' style={{ borderBottom: "1px solid #ededed" }}>
+                                                        <div key={product.id}>
                                                             <Row>
-                                                                <Col xs="1" className='align-self-center'>
+                                                                {/* <Col xs="1" className='align-self-center'>
                                                                     <Input type="checkbox" checked={selectedItems[product.id] || false} onChange={() => toggleCheckbox(product.id)} />
-                                                                </Col>
-                                                                <Col className='align-self-center' xs="4">
+                                                                </Col> */}
+                                                                <Col className='align-self-center' xs="7">
                                                                     <img src={product.image} alt={product.name} className='img-fluid' />
                                                                 </Col>
-                                                                <Col xs="7">
-                                                                    <Row className='mb-3'>
-                                                                        <Col xs="10" className='px-0'>
+                                                                <Col xs="5">
+                                                                    <Row className='mb-3 mx-0 justify-content-between'>
+                                                                        <Col xs="8" className='px-0'>
                                                                             <CardTitle tag="div" style={{ fontWeight: 'bold' }}>{product.name}</CardTitle>
                                                                         </Col>
                                                                         <Col xs="1">
                                                                             <FontAwesomeIcon className="pe-3" onClick={() => removeItem(product.id)} icon={faTrash} />
                                                                         </Col>
-
                                                                     </Row>
-
-                                                                    <Row>
-                                                                        <Col xs="5" className='px-0'>
-                                                                            <CardText style={{ color: 'red', fontWeight: '600' }}>Price: ¥{product.quantity * product.price}</CardText>
-                                                                        </Col>
-                                                                        <Col className='text-center px-0' xs="7">
-
-                                                                            <Button color="primary" onClick={() => decrementQuantity(product.id)} style={{ backgroundColor: 'transparent', color: 'grey', border: '1px solid grey', width: '50px', padding: '1px' }}>-</Button>{' '}
-                                                                            <span className='mx-1'>{product.quantity}{' '}</span>
-                                                                            <Button color="primary" onClick={() => incrementQuantity(product.id)} style={{ backgroundColor: 'transparent', color: 'grey', border: '1px solid grey', width: '50px', padding: '1px' }}>+</Button>{' '}
-                                                                        </Col>
-                                                                    </Row>
-
                                                                 </Col>
                                                             </Row>
-                                                            <br />
+                                                            <Row className='my-3'>
+                                                                {/* <Col xs="1">
+                                                                </Col> */}
+                                                                <Col xs="6" className='align-self-center'>
+                                                                    <CardText style={{ color: 'red', fontWeight: '600' }}>¥{product.quantity * product.price}</CardText>
+                                                                </Col>
+                                                                <Col className='text-end' xs="6">
+                                                                    {/* <Button className='btn btn-danger' color="primary" onClick={() => decrementQuantity(product.id)} style={{ width: '50px', padding: '3px' }}><FontAwesomeIcon icon={faMinus} /></Button>{' '} */}
+                                                                    <span className='mx-1'>x{product.quantity}{' '}</span>
+                                                                    {/* <Button className='btn btn-success' color="primary" onClick={() => incrementQuantity(product.id)} style={{ width: '50px', padding: '3px' }}><FontAwesomeIcon icon={faPlus} /></Button>{' '} */}
+                                                                </Col>
+                                                            </Row>
                                                         </div>
-                                                    ))}
-                                            </CardBody>
+                                                    </CardBody>
+                                                ))}
                                         </Card>
-                                    </Col>
-                                </Row>
-                            )}
-
-                    </Col>
-                </Row>
-                <Row className='mb-5'>
-                    <Col xs="12" className='mb-5'>
-                        {products.some(product => {
-                            const [day, month, year] = product.expiredDate.split("/");
-                            const formattedDate = `${month}/${day}/${year}`;
-                            const currentDate = new Date();
-                            const expirationDate = new Date(formattedDate);
-                            return expirationDate < currentDate;
-                        }) && (
-                                <Card style={{ width: '93%', margin: '1rem' }}>
-                                    <Row className='mt-3 sticky-bottom'>
-                                        <Col style={{ fontWeight: '800' }} className='text-center' xs="4">已失效</Col>
-                                        <Col xs="4" style={{ color: 'red', fontWeight: '800' }}>移入收藏夹</Col>
-                                        <Col onClick={() => removeExpiredItem()} xs="4" style={{ color: 'red', fontWeight: '800' }}>清空失效的宝贝</Col>
-                                    </Row>
-                                    <CardBody className="">
-                                        {products
-                                            .filter(product => {
-                                                const [day, month, year] = product.expiredDate.split("/");
-                                                const formattedDate = `${month}/${day}/${year}`;
-                                                const currentDate = new Date();
-                                                const expirationDate = new Date(formattedDate);
-                                                return expirationDate < currentDate;
-                                            })
-                                            .map(product => (
-                                                <div key={product.id}>
-                                                    <Row >
-                                                        <Col xs="1" className='align-self-center'>
-                                                            {/* <Input type="checkbox" checked={selectedItems[product.id] || false} onChange={() => toggleCheckbox(product.id)} /> */}
-                                                        </Col>
-                                                        <Col className='align-self-center' xs="4">
-                                                            <img src={product.image} alt={product.name} className='img-fluid' />
-                                                        </Col>
-                                                        <Col xs="7">
-                                                            <Row className='mb-3'>
-                                                                <Col xs="10" className='px-0'>
-                                                                    <CardTitle tag="div" style={{ fontWeight: 'bold' }}>{product.name}</CardTitle>
-                                                                </Col>
-                                                                <Col xs="1">
-                                                                    {/* <FontAwesomeIcon className="pe-3" onClick={() => removeItem(product.id)} icon={faTrash} /> */}
-                                                                </Col>
-
-                                                            </Row>
-
-                                                            <Row>
-                                                                <Col xs="5" className='px-0'>
-                                                                    <CardText style={{ color: 'red', fontWeight: '600' }}>Price: ¥{product.quantity * product.price}</CardText>
-                                                                </Col>
-                                                                <Col className='text-center px-0' xs="7">
-
-                                                                    <Button color="primary" disabled="true" onClick={() => decrementQuantity(product.id)} style={{ backgroundColor: 'transparent', color: 'grey', border: '1px solid grey', width: '50px', padding: '1px' }}>-</Button>{' '}
-                                                                    <span className='mx-1'>{product.quantity}{' '}</span>
-                                                                    <Button color="primary" disabled="true" onClick={() => incrementQuantity(product.id)} style={{ backgroundColor: 'transparent', color: 'grey', border: '1px solid grey', width: '50px', padding: '1px' }}>+</Button>{' '}
-                                                                </Col>
-                                                            </Row>
-
-                                                        </Col>
-                                                    </Row>
-                                                    <br />
-                                                </div>
-                                            ))}
-                                    </CardBody>
-                                </Card>
-                            )}
-
-                    </Col>
-                </Row>
+                                    )}
+                            </Col>
+                        </Row>
+                    </div >
+                    <Row className="fixed-bottom align-items-center justify-content-between p-3 mx-0" style={{ backgroundColor: '#f8f9fa' }}>
+                        <Col xs="3" className='text-start'>
+                            <Input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
+                            <span className="ms-2">全选</span>
+                        </Col>
+                        <Col xs="7" className="text-end">
+                            <span className='me-3'>合计： ¥{totalSelectedPrice !== 0 ? totalSelectedPrice : "0.00"}</span>
+                            <Button color="primary" style={{ borderRadius: '30px', backgroundColor: '#ADD8E6', borderColor: '#ADD8E6' }}>结算</Button>
+                        </Col>
+                    </Row>
+                </div>
             </div>
-
-            <Row className="fixed-bottom align-items-center justify-content-between p-3" style={{ backgroundColor: '#f8f9fa' }}>
-                <Col xs="auto" className='text-start'>
-                    <Input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
-                    <span className="ms-2">全选</span>
-                </Col>
-                <Col xs="auto" className="text-end">
-                    合计： ¥{totalSelectedPrice !== 0 ? totalSelectedPrice : "0.00"}
-                </Col>
-
-                <Col xs="auto" className="text-center">
-                    <Button color="primary" style={{ borderRadius: '30px', backgroundColor: '#ADD8E6', borderColor: '#ADD8E6' }}>结算</Button>
-                </Col>
-            </Row>
 
             {/* <Container>
                 <Row>
