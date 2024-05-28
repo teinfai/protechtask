@@ -147,7 +147,7 @@ function Cart() {
         <Fragment>
 
             <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-7 col-12">
+                <div class="col-lg-4 col-md-7 col-12 pe-0">
                     <Row className="align-items-start justify-content-center mb-1 mx-0" style={{ backgroundColor: '#70b2d9', backgroundImage: 'linear-gradient(315deg, #70b2d9 0%, #39e5b6 74%)', height: "150px" }}>
                         <Col onClick={gobacktoshopping} className="text-center align-self-center pb-5" xs="3">
                             <FontAwesomeIcon icon={faSearch} onClick={gobacktoshopping} size="lg" className="search-icon" />
@@ -297,15 +297,20 @@ function Cart() {
                             </Col>
                         </Row>
                     </div >
-                    <Row className="fixed-bottom align-items-center justify-content-between p-3 mx-0" style={{ backgroundColor: '#f8f9fa' }}>
-                        <Col xs="3" className='text-start'>
-                            <Input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
-                            <span className="ms-2">全选</span>
-                        </Col>
-                        <Col xs="7" className="text-end">
-                            <span className='me-3'>合计： ¥{totalSelectedPrice !== 0 ? totalSelectedPrice : "0.00"}</span>
-                            <Button color="primary" style={{ borderRadius: '30px', backgroundColor: '#ADD8E6', borderColor: '#ADD8E6' }}>结算</Button>
-                        </Col>
+                    <Row>
+
+
+                        <Row className="fixed-bottom align-items-center justify-content-between p-3 mx-0 pe-0" style={{ backgroundColor: '#f8f9fa' }}>
+                            <Col xs="3" className='text-start'>
+                                <Input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
+                                <span className="ms-2">全选</span>
+                            </Col>
+                            <Col xs="7" className="text-end">
+                                <span className='me-3'>合计： ¥{totalSelectedPrice !== 0 ? totalSelectedPrice : "0.00"}</span>
+                                <Button color="primary" style={{ borderRadius: '30px', backgroundColor: '#ADD8E6', borderColor: '#ADD8E6' }}>结算</Button>
+                            </Col>
+                        </Row>
+
                     </Row>
                 </div>
             </div>
