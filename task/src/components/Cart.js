@@ -263,10 +263,10 @@ function Cart() {
                                                                 {/* <Col xs="1" className='align-self-center'>
                                                                     <Input type="checkbox" checked={selectedItems[product.id] || false} onChange={() => toggleCheckbox(product.id)} />
                                                                 </Col> */}
-                                                                <Col className='align-self-center' xs="7">
+                                                                <Col className='align-self-center' xs="6">
                                                                     <img src={product.image} alt={product.name} className='img-fluid' />
                                                                 </Col>
-                                                                <Col xs="5">
+                                                                <Col xs="6">
                                                                     <Row className='mb-3 mx-0 justify-content-between'>
                                                                         <Col xs="8" className='px-0'>
                                                                             <CardTitle tag="div" style={{ fontWeight: 'bold' }}>{product.name}</CardTitle>
@@ -297,19 +297,19 @@ function Cart() {
                             </Col>
                         </Row>
                     </div >
-                    <Row>
-
-
-                        <Row className="fixed-bottom align-items-center justify-content-between p-3 mx-0 pe-0" style={{ backgroundColor: '#f8f9fa' }}>
-                            <Col xs="3" className='text-start'>
-                                <Input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
-                                <span className="ms-2">全选</span>
-                            </Col>
-                            <Col xs="7" className="text-end">
-                                <span className='me-3'>合计： ¥{totalSelectedPrice !== 0 ? totalSelectedPrice : "0.00"}</span>
-                                <Button color="primary" style={{ borderRadius: '30px', backgroundColor: '#ADD8E6', borderColor: '#ADD8E6' }}>结算</Button>
-                            </Col>
-                        </Row>
+                    <Row className='mx-0'>
+                        <div className="col-lg-4 col-md-7 col-12 price-bottom align-items-center justify-content-between p-3 mx-0 pe-0" style={{ backgroundColor: '#f8f9fa' }}>
+                            <Row className='justify-content-center'>
+                                <Col xs="3" className='text-start align-self-center'>
+                                    <Input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
+                                    <span className="ms-2">全选</span>
+                                </Col>
+                                <Col xs="7" className="text-end align-self-center">
+                                    <span className='me-3'>合计： ¥{totalSelectedPrice !== 0 ? totalSelectedPrice : "0.00"}</span>
+                                    <Button color="primary" style={{ borderRadius: '30px', backgroundColor: '#ADD8E6', borderColor: '#ADD8E6' }}>结算</Button>
+                                </Col>
+                            </Row>
+                        </div>
 
                     </Row>
                 </div>
